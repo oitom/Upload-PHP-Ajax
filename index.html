@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Ajax</title>
+</head>
+	<body>
+		<input type="file" name="upload-file" id="upload-file">
+		<button id="btn-upload">Upload</button>
+	</body>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script>
+		$('#btn-upload').on('click', function() {
+			var file_data = $('#upload-file').prop('files')[0];
+
+			var form_data = new FormData();                  
+			form_data.append('file', file_data);
+			form_data.append('legend', 'My upload');
+			
+			$.ajax({
+				url: 'upload.php',
+				dataType: 'text',
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,                         
+				type: 'post',
+				success: function(data){
+					console.log(data);
+				}
+			});
+		});
+	</script>
+</html>
